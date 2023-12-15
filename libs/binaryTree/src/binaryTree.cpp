@@ -68,6 +68,3 @@ bool binaryTree::addNode(const std::string senior, const std::string junior) {
     return true;
 }
 
-binaryTree::binaryTree(const std::string pos) {
-    root = new node(pos);
-}

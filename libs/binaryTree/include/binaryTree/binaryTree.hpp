@@ -26,11 +26,6 @@ public:
 
     binaryTree(const std::string pos);
 
-    ~binaryTree() {
-        std::cout << "deconstructed" << std::endl;
-        removeNode(root);
-    }
-
     ~binaryTree();
 
     bool removeNode(node *curNode);
