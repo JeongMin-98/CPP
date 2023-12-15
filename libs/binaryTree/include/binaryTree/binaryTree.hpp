@@ -31,25 +31,30 @@ public:
     ~binaryTree() {
         std::cout << "deconstructed" << std::endl;
         removeNode(root);
-        delete root;
     }
 
     bool removeNode(node *curNode) {
         if (curNode == nullptr) {
             return false;
         }
-        if (curNode->first == nullptr && curNode->second == nullptr) {
-            std::cout << "curNode [" << curNode->position << "] deconstructed" << std::endl;
-            delete curNode;
-            return true;
-        }
+
         if (curNode->first != nullptr) {
             removeNode(curNode->first);
+            curNode->first = nullptr;
         }
         if (curNode->second != nullptr) {
             removeNode(curNode->second);
+            curNode->second = nullptr;
         }
 
+        if (curNode->first == nullptr && curNode->second == nullptr) {
+            std::cout << "curNode [" << curNode->position << "] deconstructed" << std::endl;
+            auto temp = curNode;
+            temp->first = nullptr;
+            temp->second = nullptr;
+            delete temp;
+            return true;
+        }
     }
 
     nodePtr find(node *curNode, const std::string value) {
@@ -79,7 +84,7 @@ public:
         } else {
             seniorNode->second = new node(junior);
         }
-        std::cout << senior << "아래에 " << junior << "를(을) 추가했습니다. " << std::endl;
+        std::cout << "[" << senior << "] 아래에 [" << junior << "] 를(을) 추가했습니다. " << std::endl;
         return true;
     }
 };
