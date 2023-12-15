@@ -8,6 +8,7 @@ set(LIBRARIES_DIR libs)
 set(LIBRARIES
         singleLinkedList
         circularLinkedList
+        binaryTree
         )
 
 project(
