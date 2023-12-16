@@ -5,8 +5,24 @@
 #include <iostream>
 
 int main() {
-    binaryTree tree("root");
-    tree.addNode("root", "f1");
+
+    binaryTree tree("CEO");
+
+    tree.addNode("CEO", "부사장");
+    tree.addNode("부사장", "IT부장");
+    tree.addNode("부사장", "마케팅부장");
+    tree.addNode("IT부장", "보안팀장");
+    tree.addNode("IT부장", "웹개발팀장");
+    tree.addNode("마케팅부장", "물류팀장");
+    tree.addNode("마케팅부장", "홍보팀장");
+    tree.addNode("부사장", "재무부장");
+
+    tree.preOrder(tree.getRoot());
+    std::cout << std::endl;
+    tree.inOrder(tree.getRoot());
+    std::cout << std::endl;
+    tree.postOrder(tree.getRoot());
+    std::cout << std::endl;
 
     return 0;
 

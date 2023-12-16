@@ -68,3 +68,31 @@ bool binaryTree::addNode(const std::string senior, const std::string junior) {
     return true;
 }
 
+void binaryTree::preOrder(node *start) {
+    if (start == nullptr) return;
+
+    std::cout << start->position << ", ";
+    preOrder(start->first);
+    preOrder(start->second);
+}
+
+void binaryTree::inOrder(node *start) {
+    if (start == nullptr) return;
+
+    inOrder(start->first);
+    std::cout << start->position << ", ";
+    inOrder(start->second);
+}
+
+void binaryTree::postOrder(node *start) {
+    if (start == nullptr) return;
+
+    postOrder(start->first);
+    postOrder(start->second);
+    std::cout << start->position << ", ";
+}
+
+binaryTree::nodePtr binaryTree::getRoot() {
+    return this->root;
+}
+

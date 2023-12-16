@@ -29,10 +29,38 @@ public:
                    << std::endl);
     }
 
+    bool operator==(const Job& other) const {
+        return (id == other.id && userName == other.userName && copy == other.copy);
+    }
+
+    bool operator!=(const Job& other) const {
+        return !(*this == other); // != 연산자를 == 연산자를 사용하여 정의하는 방식
+    }
+
     Job &operator=(const Job &other){
-        this->id = other.id;
-        this->userName = other.userName;
-        this->copy = other.copy;
+        std::cout << "copy";
+        if (*this != other){
+            this->id = other.id;
+            this->userName = other.userName;
+            this->copy = other.copy;
+        }
+        return *this;
+    }
+
+    Job& operator=(Job&& other) noexcept {
+        std::cout << "move!";
+        if (this != &other) {
+            // 자원 이동 등의 작업을 수행
+            this->id = std::move(other.id);
+            this->userName = std::move(other.userName);
+            this->copy = std::move(other.copy);
+
+            // 이동 후 다른 객체를 유효하지 않은 상태로 만듭니다.
+            other.id = 0;
+            other.userName = "";
+            other.copy = 0;
+        }
+        return *this;
     }
 
 };
@@ -58,6 +86,11 @@ public:
 };
 
 int main(){
+
+    Job job1(1, "test", 1);
+    Job job2;
+    job2 = job1;
+
     Printer printer;
 
     printer.requestJob("Jeong", 5);

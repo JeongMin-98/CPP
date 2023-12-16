@@ -28,11 +28,19 @@ public:
 
     ~binaryTree();
 
+    nodePtr getRoot();
+
     bool removeNode(node *curNode);
 
     nodePtr find(node *curNode, const std::string value);
 
     bool addNode(const std::string senior, const std::string junior);
+
+    void preOrder(node *start);
+
+    void inOrder(node *start);
+
+    void postOrder(node *start);
 };
 
 #endif //CPPLEARN_BINARYTREE_HPP
