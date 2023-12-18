@@ -5,7 +5,7 @@ set(LIBRARY_NAME binaryTree)
 set(LIBRARY_HEADERS_DIR
         include/${LIBRARY_NAME}
         )
-set(LIBRARY_HEADERS
+set(LIBRARY_HEADER
         ${LIBRARY_HEADERS_DIR}/${LIBRARY_NAME}.hpp
         )
 set(LIBRARY_SOURCE_DIR
@@ -18,7 +18,7 @@ set(LIBRARY_SOURCE
 project(${PROJECT_NAME})
 
 add_library(${LIBRARY_NAME} STATIC
-        ${LIBRARY_HEADERS}
+        ${LIBRARY_HEADER}
         ${LIBRARY_SOURCE}
         )
 
