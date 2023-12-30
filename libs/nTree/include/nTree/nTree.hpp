@@ -48,12 +48,13 @@ class FileSystem {
     using nodePtr = node *;
 
 private:
+    nodePtr root = nullptr;
+    nodePtr current = nullptr;
+
+public:
 //    nodePtr root = nullptr;
 //    nodePtr current = nullptr;
 
-public:
-    nodePtr root = nullptr;
-    nodePtr current = nullptr;
     FileSystem() {
         root = new node(1, "/");
         current = root;
@@ -67,7 +68,9 @@ public:
 
     void addNode(int fileType, std::string fileName);
 
-    void changeDir(std::string path);
+    void changeDir(const std::string path);
+
+    nodePtr printWorkingDir();
 
     nodePtr findNode(nodePtr cur, std::string nodeName);
 };

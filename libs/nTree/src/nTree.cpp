@@ -15,7 +15,8 @@ vector<string> split(std::string str, const char delimiter) {
     return result;
 }
 
-FileSystem::nodePtr FileSystem::findNode(FileSystem::nodePtr cur, std::string nodeName) {
+FileSystem::nodePtr FileSystem::
+findNode(FileSystem::nodePtr cur, std::string nodeName) {
 
     nodePtr foundNodePtr;
     if (cur->name == nodeName) {
@@ -25,18 +26,27 @@ FileSystem::nodePtr FileSystem::findNode(FileSystem::nodePtr cur, std::string no
         return nullptr;
     }
     for (auto it: cur->children) {
-        if (it->flag == 1) {
-            nodePtr tempPtr;
-            tempPtr = findNode(it, nodeName);
-            foundNodePtr = (tempPtr == nullptr ? foundNodePtr : tempPtr);
-        }
+        nodePtr tempPtr;
+        tempPtr = findNode(it, nodeName);
+        foundNodePtr = (tempPtr == nullptr ? foundNodePtr : tempPtr);
     }
     return foundNodePtr;
 }
 
-void FileSystem::changeDir(std::string path) {
-    vector<string> dirs = split(path, '/');
 
+void FileSystem::changeDir(const std::string path) {
+    nodePtr destNode;
+    vector<string> dirs = split(path, '/');
+    // if path is absolute
+    if (path[0] == '/') {
+        destNode = findNode(root, dirs.back());
+        current = (destNode == nullptr ? current : destNode);
+        return;
+    }
+    // if path is relative
+    destNode = findNode(current, dirs.back());
+    current = (destNode == nullptr ? current : destNode);
+    return;
 }
 
 void FileSystem::addNode(int fileType, std::string fileName) {
@@ -53,4 +63,9 @@ void FileSystem::list() {
         cout << (it->flag == 1 ? "/" : "") << it->name << " ";
     }
     cout << endl;
+}
+
+FileSystem::nodePtr FileSystem::printWorkingDir() {
+    cout << current->name;
+    return current;
 }
