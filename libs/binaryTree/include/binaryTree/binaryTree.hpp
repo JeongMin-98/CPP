@@ -8,6 +8,8 @@
 #include<iostream>
 #include<queue>
 
+
+
 template<typename T>
 struct node {
     T data;
@@ -34,7 +36,6 @@ public:
     ~binaryTree();
 
     nodePtr getRoot();
-
 
     nodePtr find(nodePtr curNode, const std::string value);
 
@@ -65,13 +66,31 @@ public:
 
     void deleteNode(nodePtr curNode);
 
+    void inOrder();
+
 private:
     nodePtr find_impl(nodePtr curNode, T value);
 
     void insert_impl(nodePtr curNode, T value);
 
     void deleteNodeImpl(nodePtr curNode);
+
+    void inOrder_impl(nodePtr start);
 };
+
+template<typename T>
+void BinarySearchTree<T>::inOrder() {
+    inOrder_impl(root);
+}
+
+template<typename T>
+void BinarySearchTree<T>::inOrder_impl(BinarySearchTree::nodePtr start) {
+    if (!start) return;
+
+    inOrder_impl(start->left);
+    std::cout << start->data << " ";
+    inOrder_impl(start->right);
+}
 
 template<typename T>
 BinarySearchTree<T>::~BinarySearchTree<T>() {
@@ -80,7 +99,10 @@ BinarySearchTree<T>::~BinarySearchTree<T>() {
 
 template<typename T>
 typename BinarySearchTree<T>::nodePtr BinarySearchTree<T>::find_impl(nodePtr curNode, T value) {
-    if (curNode == nullptr) return nullptr;
+    if (curNode == nullptr) {
+        std::cout << "No value in tree" << std::endl;
+        return nullptr;
+    }
 
     if (value == curNode->data) {
         std::cout << "find value" << std::endl;
@@ -131,6 +153,7 @@ void BinarySearchTree<T>::insert(T value) {
 
 template<typename T>
 void BinarySearchTree<T>::deleteNodeImpl(BinarySearchTree::nodePtr curNode) {
+
     if (curNode->left != nullptr) {
         deleteNodeImpl(curNode->left);
         curNode->left = nullptr;
@@ -152,9 +175,11 @@ void BinarySearchTree<T>::deleteNodeImpl(BinarySearchTree::nodePtr curNode) {
 
 template<typename T>
 void BinarySearchTree<T>::deleteNode(BinarySearchTree::nodePtr curNode) {
-    if (curNode != nullptr){
+    // for deconstructor , If program exits, deconsturct tree.
+    if (curNode != nullptr) {
         deleteNodeImpl(curNode);
     }
 }
+
 
 #endif //CPPLEARN_BINARYTREE_HPP

@@ -9,6 +9,7 @@ set(LIBRARIES
         singleLinkedList
         circularLinkedList
         binaryTree
+        nTree
         )
 
 project(

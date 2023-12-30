@@ -56,6 +56,8 @@ public:
 
     circularLinkedList(const int &newData);
 
+    ~circularLinkedList();
+
 //    circularLinkedList(const singlyLinkedList &other);
 
 //    circularLinkedList(const std::initializer_list<int> &ilist);

@@ -18,6 +18,8 @@ struct musicPlayer {
 
     musicPlayer() = default;
 
+    ~musicPlayer() = default;
+
     void next();
 
     void previous();

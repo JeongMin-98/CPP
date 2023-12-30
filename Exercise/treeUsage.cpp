@@ -3,7 +3,6 @@
 //
 #include "binaryTree/binaryTree.hpp"
 #include <iostream>
-
 int main() {
 
     binaryTree tree("CEO");
@@ -24,6 +23,8 @@ int main() {
     tree.postOrder(tree.getRoot());
     std::cout << std::endl;
 
+    std::cout << "level Order" << std::endl;
+//    tree.levelOrder(tree.getRoot());
     return 0;
 
 }

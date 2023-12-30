@@ -6,8 +6,8 @@
 
 void print(const circularLinkedList &list) {
 
-    if (list.begin().get() == nullptr && list.end().get() == nullptr){
-        std::cout<<"empty list" << std::endl;
+    if (list.begin().get() == nullptr && list.end().get() == nullptr) {
+        std::cout << "empty list" << std::endl;
         return;
     }
 
@@ -152,6 +152,22 @@ void circularLinkedList::pop_back() {
         }
         delete last;
     }
+}
+
+circularLinkedList::~circularLinkedList() {
+    if (front == nullptr)
+        return;
+
+    auto current = front;
+    while (current->next != front) {
+        auto temp = current;
+        current = current->next;
+        delete temp;
+    }
+    delete current; // Delete the last node
+
+    front = nullptr;
+    back = nullptr;
 }
 
 
