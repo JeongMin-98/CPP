@@ -68,6 +68,8 @@ public:
 
     void addNode(int fileType, std::string fileName);
 
+    void deleteNode(std::string fileName);
+
     void changeDir(const std::string path);
 
     nodePtr printWorkingDir();

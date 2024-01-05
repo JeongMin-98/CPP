@@ -20,17 +20,23 @@ findNode(FileSystem::nodePtr cur, std::string nodeName) {
 
     nodePtr foundNodePtr;
     if (cur->name == nodeName) {
+        // When find targetNode.
         return cur;
     }
-    if (cur->children.empty()) {
-        return nullptr;
+    if (cur->flag == 1) {
+        // When targetNode is file and empty node.
+        if (cur->children.empty()) {
+            return nullptr;
+        }
+        // When targetNode is file and has any nodes.
+        for (auto it: cur->children) {
+            nodePtr tempPtr;
+            tempPtr = findNode(it, nodeName);
+            foundNodePtr = (tempPtr == nullptr ? foundNodePtr : tempPtr);
+        }
+        return foundNodePtr;
     }
-    for (auto it: cur->children) {
-        nodePtr tempPtr;
-        tempPtr = findNode(it, nodeName);
-        foundNodePtr = (tempPtr == nullptr ? foundNodePtr : tempPtr);
-    }
-    return foundNodePtr;
+
 }
 
 
@@ -49,7 +55,13 @@ void FileSystem::changeDir(const std::string path) {
     return;
 }
 
+void FileSystem::deleteNode(std::string fileName) {
+    nodePtr targetNode = findNode(current, fileName);
+
+}
+
 void FileSystem::addNode(int fileType, std::string fileName) {
+    // When you add New Node(file or Directory), You use this method.
     nodePtr newNode;
     newNode = new node(fileType, fileName);
     current->children.push_back(newNode);
@@ -66,6 +78,9 @@ void FileSystem::list() {
 }
 
 FileSystem::nodePtr FileSystem::printWorkingDir() {
+    // Print working Directory.
     cout << current->name;
     return current;
 }
+
+
